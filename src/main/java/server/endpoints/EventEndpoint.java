@@ -3,6 +3,7 @@ package server.endpoints;
 import com.google.gson.Gson;
 import server.controllers.UserController;
 import server.models.Event;
+import server.models.User;
 import server.providers.EventProvider;
 
 import javax.ws.rs.GET;
@@ -23,6 +24,7 @@ import com.google.gson.JsonObject;
 import server.models.Event;
 import server.providers.EventProvider;
 import server.providers.PostProvider;
+import server.providers.UserProvider;
 import server.util.Log;
 
 import javax.ws.rs.POST;
@@ -208,6 +210,9 @@ public class EventEndpoint {
         return Response.status(200).type("text/plain").entity("User subscribed to event").build();
 
             }
+
+
+
 
 
 }

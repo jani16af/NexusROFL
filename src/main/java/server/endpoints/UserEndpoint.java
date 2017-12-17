@@ -2,6 +2,7 @@ package server.endpoints;
 
 
 import com.google.gson.Gson;
+import server.models.Event;
 import server.models.User;
 import server.providers.EventProvider;
 import server.providers.PostProvider;
@@ -185,6 +186,56 @@ public class UserEndpoint {
 
         return Response.status(200).type("text/plain").entity("User was deleted").build();
     }
+
+
+    /** This method returns one event chosen by the specific id for the event. The method creates objects of the classes EventProvider,
+     * PostProvider and UserController and inserts the object for the class EventProvider in the ArrayList "Event".
+     *
+     *
+     *
+     * @return It returns a response that converts the ArrayList from GSON to JSON
+     *
+     */
+    @GET
+    @Path("{id}/attend")
+    public Response getAttendedEvents (@PathParam("id") int user_id){
+
+        EventProvider eventProvider = new EventProvider();
+        PostProvider postProvider = new PostProvider();
+
+        User user;
+        Event event;
+
+
+
+        try {
+
+            user = userProvider.getUser(user_id);
+            event = eventProvider.getEvent(user_id);
+
+            event.getPosts().addAll(postProvider.getPostByUserId(user_id));
+
+            //Get all participants in the event
+
+            user.getEvents().addAll(userController.getEventsForUser(user_id));
+
+        } catch (SQLException e) {
+
+            log.writeLog("DB",this.getClass(),("An SQL exception occurred while running getAttendEvent - " +
+                    "User active was: " + AuthenticationFilter.userEmailByToken),1);
+
+            e.printStackTrace();
+            return Response.status(500).build();
+        }
+
+        log.writeLog(this.getClass().getName(),this.getClass(),("getAttendEvent was successful - " +
+                "User active was: " + AuthenticationFilter.userEmailByToken),0);
+
+        return Response.status(200).type("application/json").entity(new Gson().toJson(user)).build();
+
+    }
+
+
 }
 
 

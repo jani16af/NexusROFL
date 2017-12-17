@@ -1,8 +1,10 @@
 package server.controllers;
 
 import server.models.User;
+import server.models.Event;
 import server.providers.EventProvider;
 import server.providers.UserProvider;
+
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -121,4 +123,30 @@ public class UserController {
         return participants;
 
     }
+
+    /**
+     * This method is used to get all events for an specific user.
+     * @param user_id
+     * @return
+     */
+
+    public ArrayList<Event> getEventsForUser(int user_id) throws SQLException{
+
+
+        EventProvider eventProvider = new EventProvider();
+        UserProvider userProvider = new UserProvider();
+
+        ArrayList<Event> events = new ArrayList<Event>();
+
+        for(Integer event_id: userProvider.getAttendingEventsByUserId(user_id)) {
+
+            events.add(eventProvider.getEvent(event_id));
+
+        }
+
+        return events;
+
+    }
+
+
 }
