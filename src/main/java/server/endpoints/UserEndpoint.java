@@ -2,6 +2,8 @@ package server.endpoints;
 
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import org.apache.ibatis.annotations.Param;
 import server.models.Event;
 import server.models.User;
 import server.providers.EventProvider;
@@ -196,6 +198,7 @@ public class UserEndpoint {
      * @return It returns a response that converts the ArrayList from GSON to JSON
      *
      */
+
     @GET
     @Path("{id}/attend")
     public Response getAttendedEvents (@PathParam("id") int user_id){
@@ -232,6 +235,41 @@ public class UserEndpoint {
                 "User active was: " + AuthenticationFilter.userEmailByToken),0);
 
         return Response.status(200).type("application/json").entity(new Gson().toJson(user)).build();
+
+    }
+
+    /** This method lets the user subscribe to a specific event.
+     * The method converts from JSON to GSON
+     *
+     * @param jsonData
+     * @return It returns a response with a status code 200.
+     */
+    @POST
+    @Path("/subscribe")
+    public Response subscribeToEvent(String jsonData){
+
+        JsonObject jsonObj = new Gson().fromJson(jsonData, JsonObject.class);
+        int user_id = jsonObj.get("user_id").getAsInt();
+        int event_id = jsonObj.get("event_id").getAsInt();
+
+        //Creates an object of the class EventProvider
+        EventProvider eventProvider = new EventProvider();
+
+        try {
+            eventProvider.subscribeToEvent(user_id, event_id);
+        } catch (SQLException e) {
+
+            log.writeLog("DB",this.getClass(),("An SQL exception occurred while running subscribeToEvent - " +
+                    "User active was: " + AuthenticationFilter.userEmailByToken),1);
+
+            e.printStackTrace();
+            return Response.status(500).build();
+        }
+
+        log.writeLog(this.getClass().getName(),this.getClass(),("subscribeToEvent was successful - " +
+                "User active was: " + AuthenticationFilter.userEmailByToken),0);
+
+        return Response.status(200).type("text/plain").entity("User subscribed to event").build();
 
     }
 
