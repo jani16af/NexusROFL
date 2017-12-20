@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * This class defines the variables of User.
- *
+ * <p>
  * Created by Filip on 10-10-2017.
  */
 public class User {
@@ -22,7 +22,7 @@ public class User {
     private ArrayList<Event> events;
     private ArrayList<Post> posts;
 
-    public User (){
+    public User() {
         this.events = new ArrayList<Event>();
         this.posts = new ArrayList<Post>();
     }
@@ -32,7 +32,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String email,String salt,String password) {
+    public User(String email, String salt, String password) {
         this.email = email;
         this.salt = salt;
         this.password = password;
@@ -57,7 +57,7 @@ public class User {
     */
 
     // Use this constructor when assembling data for new user creation
-       public User(String password, String firstName, String lastName, String email, String description, char gender, String major, int semester){
+    public User(String password, String firstName, String lastName, String email, String description, char gender, String major, int semester) {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -90,8 +90,7 @@ public class User {
         this.id = id;
     }
 
-    public User(int user_id, String first_name, String last_name, String email, String password, String salt, String description, char gender, String major, int semester)
-    {
+    public User(int user_id, String first_name, String last_name, String email, String password, String salt, String description, char gender, String major, int semester) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

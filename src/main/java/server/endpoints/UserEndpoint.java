@@ -22,7 +22,7 @@ import java.sql.SQLException;
 
 /**
  * Created by Marc & Mikkel on 17-10-2017.
- *
+ * <p>
  * This is our user endpoint, which handles the input given from the client regarding user-creation.
  */
 @Path("/users")
@@ -177,38 +177,35 @@ public class UserEndpoint {
         } catch (Exception e) {
             e.printStackTrace();
 
-            log.writeLog("DB",this.getClass(),("An SQL exception occurred while running deleteUser - " +
-                    "User active was: " + AuthenticationFilter.userEmailByToken),1);
+            log.writeLog("DB", this.getClass(), ("An SQL exception occurred while running deleteUser - " +
+                    "User active was: " + AuthenticationFilter.userEmailByToken), 1);
 
             return Response.status(400).build();
         }
 
-        log.writeLog(this.getClass().getName(),this.getClass(),("deleteUser was successful - " +
-                "User active was: " + AuthenticationFilter.userEmailByToken),0);
+        log.writeLog(this.getClass().getName(), this.getClass(), ("deleteUser was successful - " +
+                "User active was: " + AuthenticationFilter.userEmailByToken), 0);
 
         return Response.status(200).type("text/plain").entity("User was deleted").build();
     }
 
 
-    /** This method returns one event chosen by the specific id for the event. The method creates objects of the classes EventProvider,
+    /**
+     * This method returns one event chosen by the specific id for the event. The method creates objects of the classes EventProvider,
      * PostProvider and UserController and inserts the object for the class EventProvider in the ArrayList "Event".
      *
-     *
-     *
      * @return It returns a response that converts the ArrayList from GSON to JSON
-     *
      */
 
     @GET
     @Path("{id}/attend")
-    public Response getAttendedEvents (@PathParam("id") int user_id){
+    public Response getAttendedEvents(@PathParam("id") int user_id) {
 
         EventProvider eventProvider = new EventProvider();
         PostProvider postProvider = new PostProvider();
 
         User user;
         Event event;
-
 
 
         try {
@@ -224,21 +221,22 @@ public class UserEndpoint {
 
         } catch (SQLException e) {
 
-            log.writeLog("DB",this.getClass(),("An SQL exception occurred while running getAttendEvent - " +
-                    "User active was: " + AuthenticationFilter.userEmailByToken),1);
+            log.writeLog("DB", this.getClass(), ("An SQL exception occurred while running getAttendEvent - " +
+                    "User active was: " + AuthenticationFilter.userEmailByToken), 1);
 
             e.printStackTrace();
             return Response.status(500).build();
         }
 
-        log.writeLog(this.getClass().getName(),this.getClass(),("getAttendEvent was successful - " +
-                "User active was: " + AuthenticationFilter.userEmailByToken),0);
+        log.writeLog(this.getClass().getName(), this.getClass(), ("getAttendEvent was successful - " +
+                "User active was: " + AuthenticationFilter.userEmailByToken), 0);
 
         return Response.status(200).type("application/json").entity(new Gson().toJson(user)).build();
 
     }
 
-    /** This method lets the user subscribe to a specific event.
+    /**
+     * This method lets the user subscribe to a specific event.
      * The method converts from JSON to GSON
      *
      * @param jsonData
@@ -246,7 +244,7 @@ public class UserEndpoint {
      */
     @POST
     @Path("/subscribe")
-    public Response subscribeToEvent(String jsonData){
+    public Response subscribeToEvent(String jsonData) {
 
         JsonObject jsonObj = new Gson().fromJson(jsonData, JsonObject.class);
         int user_id = jsonObj.get("user_id").getAsInt();
@@ -259,15 +257,15 @@ public class UserEndpoint {
             eventProvider.subscribeToEvent(user_id, event_id);
         } catch (SQLException e) {
 
-            log.writeLog("DB",this.getClass(),("An SQL exception occurred while running subscribeToEvent - " +
-                    "User active was: " + AuthenticationFilter.userEmailByToken),1);
+            log.writeLog("DB", this.getClass(), ("An SQL exception occurred while running subscribeToEvent - " +
+                    "User active was: " + AuthenticationFilter.userEmailByToken), 1);
 
             e.printStackTrace();
             return Response.status(500).build();
         }
 
-        log.writeLog(this.getClass().getName(),this.getClass(),("subscribeToEvent was successful - " +
-                "User active was: " + AuthenticationFilter.userEmailByToken),0);
+        log.writeLog(this.getClass().getName(), this.getClass(), ("subscribeToEvent was successful - " +
+                "User active was: " + AuthenticationFilter.userEmailByToken), 0);
 
         return Response.status(200).type("text/plain").entity("User subscribed to event").build();
 

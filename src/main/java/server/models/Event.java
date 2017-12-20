@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * This class defines the variables of the event.
- *
+ * <p>
  * Created by Filip on 10-10-2017.
  */
 public class Event {

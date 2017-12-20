@@ -18,10 +18,10 @@ public class RootEndpoint {
     Log log = new Log();
 
     @GET
-    public Response defaultGetMethod(){
+    public Response defaultGetMethod() {
 
-        log.writeLog(this.getClass().getName(),this.getClass(),("defaultGetMethod was successful - " +
-                "User active was: " + AuthenticationFilter.userEmailByToken),0);
+        log.writeLog(this.getClass().getName(), this.getClass(), ("defaultGetMethod was successful - " +
+                "User active was: " + AuthenticationFilter.userEmailByToken), 0);
 
         return Response.status(200).type("text/plain").entity("Welcome to our API").build();
 

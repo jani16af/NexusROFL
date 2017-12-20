@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * This class is responsible for establishing, delegating and closing the connection to the database.
- *
+ * <p>
  * This class relies on enviroment variables to connect to the desired database, please set these up
  * before using the DBManager.
  */
@@ -20,7 +20,7 @@ public class DBManager {
     // Establishes the conncetion to the database
 
     static {
-        log.writeLog("DB",DBManager.class,"WORKS",2);
+        log.writeLog("DB", DBManager.class, "WORKS", 2);
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection(
@@ -43,7 +43,6 @@ public class DBManager {
     }
 
     /**
-     *
      * @return Returns a Connection object, that can be used to make queries to the database
      */
     public static Connection getConnection() {

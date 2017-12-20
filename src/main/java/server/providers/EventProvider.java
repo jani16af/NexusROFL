@@ -6,7 +6,6 @@ import server.models.User;
 import server.util.DBManager;
 
 
-
 import server.models.User;
 import server.util.DBManager;
 
@@ -22,13 +21,10 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 
-
 /**
  * The purpose of this class is to communicate and making requests to the tables events and
  * events_has_users in the DB cafe_nexus. This class contains prepared statements and communicates
  * with the Event-class in the package models for getting the variables for an event
- *
- *
  */
 public class EventProvider {
 
@@ -66,7 +62,7 @@ public class EventProvider {
 
 
         }
-      
+
         //Return all events by id
         resultSet.close();
         getAllEventsStmt.close();
@@ -84,22 +80,22 @@ public class EventProvider {
         Event event = null;
         ResultSet resultSet = null;
 
-       PreparedStatement getEventStmt = DBManager.getConnection()
+        PreparedStatement getEventStmt = DBManager.getConnection()
                 .prepareStatement("SELECT * FROM events WHERE event_id = ?");
 
-       getEventStmt.setInt(1, event_id);
+        getEventStmt.setInt(1, event_id);
 
         resultSet = getEventStmt.executeQuery();
 
         while (resultSet.next()) {
             event = new Event(
-                resultSet.getInt("event_id"),
-                resultSet.getString("title"),
-                resultSet.getTimestamp("created"),
-                new User(resultSet.getInt("owner_id")),
-                resultSet.getTimestamp("beginning"),
-                resultSet.getTimestamp("ending"),
-                resultSet.getString("description"));
+                    resultSet.getInt("event_id"),
+                    resultSet.getString("title"),
+                    resultSet.getTimestamp("created"),
+                    new User(resultSet.getInt("owner_id")),
+                    resultSet.getTimestamp("beginning"),
+                    resultSet.getTimestamp("ending"),
+                    resultSet.getString("description"));
         }
 
         return event;
@@ -127,7 +123,7 @@ public class EventProvider {
                     resultSet.getString("description"));
             events.add(event);
         }
-      
+
         return events;
     }
 
@@ -150,7 +146,7 @@ public class EventProvider {
     }
 
     //Creating a method for subscribe to an event by user_id
-    public void subscribeToEvent(int user_id, int event_id) throws SQLException{
+    public void subscribeToEvent(int user_id, int event_id) throws SQLException {
 
 
         PreparedStatement subscribeToEventStmt = DBManager.getConnection()
@@ -176,7 +172,7 @@ public class EventProvider {
 
 
         //Return participants by id
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             user_ids.add(resultSet.getInt("user_id"));
         }
 
@@ -185,7 +181,6 @@ public class EventProvider {
 
         return user_ids;
     }
-
 
 
 }

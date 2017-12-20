@@ -52,13 +52,17 @@ public class Post {
 
     //Getters and setters for post variables.
 
-    public void setId(int id) {this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
     }
 
-    public Timestamp getCreated() {return created;}
+    public Timestamp getCreated() {
+        return created;
+    }
 
     public User getOwner() {
         return owner;

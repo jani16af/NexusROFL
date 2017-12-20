@@ -18,18 +18,15 @@ import java.util.ArrayList;
 
 
 /**
- *  The purpose of this class is to communicate and making requests to the tables posts
- *  in the DB cafe_nexus. This class contains prepared statements and communicates
- *  with the Post-class in the package models for getting the variables for a post.
- *  A post can both be an event and a comment. Notice a parent_id
- *
- *
- *
+ * The purpose of this class is to communicate and making requests to the tables posts
+ * in the DB cafe_nexus. This class contains prepared statements and communicates
+ * with the Post-class in the package models for getting the variables for a post.
+ * A post can both be an event and a comment. Notice a parent_id
  */
 public class PostProvider {
 
     // PreparedStatement for getting all posts from posts in DB cafe_nexus
-    public ArrayList<Post> getAllPosts() throws SQLException{
+    public ArrayList<Post> getAllPosts() throws SQLException {
 
         ArrayList<Post> allPosts = new ArrayList<>();
 
@@ -127,7 +124,7 @@ public class PostProvider {
     }
 
     //Creating method for getting one post
-    public Post getPost(int post_id) throws SQLException{
+    public Post getPost(int post_id) throws SQLException {
         Post post = null;
 
         ResultSet resultSet = null;
@@ -163,7 +160,8 @@ public class PostProvider {
     }
 
 
-    /**Creating a method that gets all comments from one post by checking if the post has a parent_id
+    /**
+     * Creating a method that gets all comments from one post by checking if the post has a parent_id
      *
      * @param parent_id
      * @return The method returns an ArrayList that contains all the comments to one post
@@ -241,7 +239,7 @@ public class PostProvider {
     }
 
     //Creating method for getting all posts by an event_id
-    public ArrayList<Post> getAllPostsByEventId(int event_id) throws SQLException{
+    public ArrayList<Post> getAllPostsByEventId(int event_id) throws SQLException {
 
         ArrayList<Post> posts = new ArrayList<Post>();
 

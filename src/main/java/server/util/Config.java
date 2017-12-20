@@ -11,8 +11,8 @@ import java.io.InputStreamReader;
 /**
  * Source code in this class taken from:
  * https://github.com/Distribuerede-Systemer-2017/
- *      STFU-new/blob/master/src/main/java/server/config/Config.java
- *
+ * STFU-new/blob/master/src/main/java/server/config/Config.java
+ * <p>
  * Created by Filip on 18-10-2017.
  */
 public final class Config {
@@ -40,7 +40,7 @@ public final class Config {
         String str = "";
 
         //Filen læses en linje ad gangen og indlæses i stringbuffer
-        while((str = reader.readLine()) != null){
+        while ((str = reader.readLine()) != null) {
             stringBuffer.append(str);
         }
         JsonParser parser = new JsonParser();
@@ -80,5 +80,7 @@ public final class Config {
         return DATABASE_PASSWORD;
     }
 
-    public static String getJwtSecret() { return JWT_SECRET; }
+    public static String getJwtSecret() {
+        return JWT_SECRET;
+    }
 }

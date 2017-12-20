@@ -14,11 +14,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- *  The purpose of this class is to communicate and making requests to the tables users
- *  in the DB cafe_nexus. This class contains prepared statements and communicates
- *  with the User-class in the package models for getting the variables for a user
- *
+ * The purpose of this class is to communicate and making requests to the tables users
+ * in the DB cafe_nexus. This class contains prepared statements and communicates
+ * with the User-class in the package models for getting the variables for a user
  */
 public class UserProvider {
 
@@ -209,7 +207,6 @@ public class UserProvider {
 
         return event_ids;
     }
-
 
 
 }
